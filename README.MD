@@ -1,4 +1,4 @@
-```markdown
+﻿
 # Sistema de Pedidos - Histórico e Documentação Completa
 
 Este documento descreve toda a trajetória do desenvolvimento do **Sistema de Pedidos**, desde a configuração inicial do projeto até a implementação de Razor Pages e front-end com Bootstrap. Ele detalha arquitetura, decisões de design, problemas enfrentados e soluções aplicadas.
@@ -217,5 +217,3 @@ dotnet run
 * Banco SQLite inicial criado e migrado via EF Core.
 * Estrutura modular para futuras melhorias, como autenticação e front-end avançado.
 
-```
-```
