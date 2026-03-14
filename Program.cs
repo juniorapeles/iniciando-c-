@@ -11,14 +11,15 @@ class Program
         
         int opcao = 0;
 
-        while (opcao != 5)
+        while (opcao != 6)
         {
             Console.WriteLine("\n========= SISTEMA DE PEDIDOS ===========");
             Console.WriteLine("1 - Cadastrar produto");
             Console.WriteLine("2 - Listar produtos");
             Console.WriteLine("3 - Adicionar item ao pedido");
-            Console.WriteLine("4 - ver total do pedido");
-            Console.WriteLine("5 - sair");
+            Console.WriteLine("4 - remover item do pedido");
+            Console.WriteLine("5 - ver total do pedido");
+            Console.WriteLine("6 - sair");
             
             Console.WriteLine("Escolha: ");
             opcao = int.Parse(Console.ReadLine());
@@ -35,17 +36,32 @@ class Program
                 
                 case 3:
                     AdicionarItemPedido();
-                    break;    
+                    break;
                 
                 case 4:
+                    RemoverItem();
+                    break;   
+                
+                case 5:
                     Console.WriteLine("Total do pedido: " + pedidoAtual.Total());
                     break;
             }
         }
     }
 
+    static void RemoverItem()
+    {
+        ListarProdutos();
+
+        Console.Write("Escolha o índice do item: ");
+        int index = int.Parse(Console.ReadLine());
+        
+        pedidoAtual.Items.RemoveAt(index);
+        Console.WriteLine("Item removido com sucesso!");
+    }
+
     static void CadastrarProduto()
-    {       
+    {      
         Console.Write("Nome do produto: ");
         string nome = Console.ReadLine();
 
