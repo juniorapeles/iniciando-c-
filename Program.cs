@@ -6,6 +6,8 @@ class Program
 {
     private static List<Produto> produtos = new List<Produto>();
     private static Pedido pedidoAtual;
+    static PedidoRepository repository = new PedidoRepository();
+    
     static void Main(string[] args)
     {
         MainFlux();
@@ -48,7 +50,7 @@ class Program
                     break;
                 
                 case 6:
-                    CadastrarCliente();
+                    Console.WriteLine("Saindo...");
                     break;
             }
         }
@@ -56,10 +58,12 @@ class Program
 
     private static void MainFlux()
     {
+        pedidoAtual = repository.Carregar();
+        
         Console.WriteLine("Cadastro de cliente");
 
         Cliente cliente = CadastrarCliente();
-
+        
         pedidoAtual = new Pedido
         {
             Cliente = cliente
@@ -73,11 +77,14 @@ class Program
         Console.WriteLine("\nCliente: " + pedidoAtual.Cliente.Nome);
         Console.WriteLine("\nEmail: " + pedidoAtual.Cliente.Email);
         
-        Console.WriteLine("Itens do Pedido: ");
-        foreach (var item in pedidoAtual.Items)
+        Console.WriteLine("\nItens do Pedido: ");
+
+        for (int i = 0; i < pedidoAtual.Items.Count; i++)
         {
-            Console.WriteLine($"{item.Produto.Nome} - {item.Quantidade} - {item.Subtotal()}");
+            var  item = pedidoAtual.Items[i];
+            Console.WriteLine($"{i} - {item.Produto.Nome} - {item.Quantidade} - {item.Subtotal()}");
         }
+        
         Console.WriteLine("Total: " + pedidoAtual.Total());
     }
 
@@ -94,12 +101,15 @@ class Program
 
     static void RemoverItem()
     {
-        ListarProdutos();
+        VerPedido();
 
         Console.Write("Escolha o índice do item: ");
         int index = int.Parse(Console.ReadLine());
         
         pedidoAtual.Items.RemoveAt(index);
+        
+        repository.Salvar(pedidoAtual);
+        
         Console.WriteLine("Item removido com sucesso!");
     }
 
@@ -141,7 +151,10 @@ class Program
             Quantidade = qtd
         };
         
-        pedidoAtual.AdcionarItem(item);
+        pedidoAtual.AdicionarItem(item);
+        
+        repository.Salvar(pedidoAtual);
+        
         Console.WriteLine("Item adicionado ao pedido!");
     }
 }

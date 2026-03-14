@@ -5,7 +5,7 @@ public class Pedido
     public List<ItemPedido> Items { get; set; } = new List<ItemPedido>();
     public Cliente Cliente { get; set; }
     
-    public void AdcionarItem(ItemPedido item)
+    public void AdicionarItem(ItemPedido item)
     {
         Items.Add(item);
     }
