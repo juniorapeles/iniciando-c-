@@ -12,3 +12,4 @@ C:\Users\Eli F A Junior\DotnetNovePreviewSete\obj\Debug\net9.0\refint\DotnetNove
 C:\Users\Eli F A Junior\DotnetNovePreviewSete\obj\Debug\net9.0\DotnetNovePreviewSete.pdb
 C:\Users\Eli F A Junior\DotnetNovePreviewSete\obj\Debug\net9.0\DotnetNovePreviewSete.genruntimeconfig.cache
 C:\Users\Eli F A Junior\DotnetNovePreviewSete\obj\Debug\net9.0\ref\DotnetNovePreviewSete.dll
+C:\Users\Eli F A Junior\DotnetNovePreviewSete\obj\Debug\net9.0\DotnetNovePreviewSete.sourcelink.json

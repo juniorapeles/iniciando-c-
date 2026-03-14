@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotnetNovePreviewSete")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e8c17146bb3acc4ecbcbcda597c0240fa0d28f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotnetNovePreviewSete")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotnetNovePreviewSete")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
