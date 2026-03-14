@@ -5,14 +5,15 @@ using DotnetNovePreviewSete;
 class Program
 {
     private static List<Produto> produtos = new List<Produto>();
-    private static Pedido pedidoAtual = new Pedido();
+    private static Pedido pedidoAtual;
     static void Main(string[] args)
     {
+        MainFlux();
         
         int opcao = 0;
-
         while (opcao != 6)
-        {
+           
+        {   
             Console.WriteLine("\n========= SISTEMA DE PEDIDOS ===========");
             Console.WriteLine("1 - Cadastrar produto");
             Console.WriteLine("2 - Listar produtos");
@@ -43,10 +44,52 @@ class Program
                     break;   
                 
                 case 5:
-                    Console.WriteLine("Total do pedido: " + pedidoAtual.Total());
+                    VerPedido();
+                    break;
+                
+                case 6:
+                    CadastrarCliente();
                     break;
             }
         }
+    }
+
+    private static void MainFlux()
+    {
+        Console.WriteLine("Cadastro de cliente");
+
+        Cliente cliente = CadastrarCliente();
+
+        pedidoAtual = new Pedido
+        {
+            Cliente = cliente
+        };
+
+        Console.WriteLine("Pedido criado para: " + cliente.Nome);
+    }
+
+    static void VerPedido()
+    {
+        Console.WriteLine("\nCliente: " + pedidoAtual.Cliente.Nome);
+        Console.WriteLine("\nEmail: " + pedidoAtual.Cliente.Email);
+        
+        Console.WriteLine("Itens do Pedido: ");
+        foreach (var item in pedidoAtual.Items)
+        {
+            Console.WriteLine($"{item.Produto.Nome} - {item.Quantidade} - {item.Subtotal()}");
+        }
+        Console.WriteLine("Total: " + pedidoAtual.Total());
+    }
+
+    static Cliente CadastrarCliente()
+    {
+        Console.Write("Nome do cliente: ");
+        string nome = Console.ReadLine();
+        
+        Console.Write("E-mail do cliente: ");
+        string email = Console.ReadLine();
+        
+        return new Cliente(nome, email);
     }
 
     static void RemoverItem()
