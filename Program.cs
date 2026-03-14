@@ -1,11 +1,13 @@
 ﻿
 using System;
 using DotnetNovePreviewSete;
+using DotnetNovePreviewSete.Services;
 
 class Program
 {
     private static List<Produto> produtos;
     static ProdutoRepository produtoRepository = new ProdutoRepository();
+    private static PedidoService pedidoService;
     
     private static Pedido pedidoAtual;
     static PedidoRepository repository = new PedidoRepository();
@@ -64,8 +66,6 @@ class Program
     {
         pedidoAtual = repository.Carregar();
         
-        Console.WriteLine("Cadastro de cliente");
-
         Cliente cliente = CadastrarCliente();
         
         pedidoAtual = new Pedido
@@ -73,6 +73,8 @@ class Program
             Cliente = cliente
         };
 
+        pedidoService = new PedidoService(pedidoAtual,repository);
+        
         Console.WriteLine("Pedido criado para: " + cliente.Nome);
     }
 
@@ -94,6 +96,7 @@ class Program
 
     static Cliente CadastrarCliente()
     {
+        Console.WriteLine("Cadastro de cliente");
         Console.Write("Nome do cliente: ");
         string nome = Console.ReadLine();
         
@@ -109,10 +112,8 @@ class Program
 
         Console.Write("Escolha o índice do item: ");
         int index = int.Parse(Console.ReadLine());
-        
-        pedidoAtual.Items.RemoveAt(index);
-        
-        repository.Salvar(pedidoAtual);
+
+        pedidoService.RemoverItem(index);
         
         Console.WriteLine("Item removido com sucesso!");
     }
@@ -157,9 +158,7 @@ class Program
             Quantidade = qtd
         };
         
-        pedidoAtual.AdicionarItem(item);
-        
-        repository.Salvar(pedidoAtual);
+        pedidoService.AdicionarItem(produtos[index], qtd);
         
         Console.WriteLine("Item adicionado ao pedido!");
     }
