@@ -1,0 +1,38 @@
+﻿@page
+@model PedidoApi.Pages.IndexModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Home";
+}
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Clientes</h5>
+                <p class="card-text">Gerencie os clientes cadastrados.</p>
+                <a href="/Clientes" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Produtos</h5>
+                <p class="card-text">Visualize e cadastre produtos.</p>
+                <a href="/Produtos" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Pedidos</h5>
+                <p class="card-text">Gerencie pedidos e itens.</p>
+                <a href="/Pedidos" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>

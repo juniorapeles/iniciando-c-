@@ -1,20 +1,48 @@
 ﻿@page
 @model PedidoApi.Pages.Clientes.IndexModel
 @{
-    Layout = null; // você pode depois criar um _Layout.cshtml, mas por enquanto é ok
+    Layout = "_Layout";
+    ViewData["Title"] = "Clientes";
 }
 
-<h2>Clientes</h2>
+<h2>Gerenciar Clientes</h2>
 
-<form method="post">
-    <input asp-for="NovoCliente.Nome" placeholder="Nome" />
-    <input asp-for="NovoCliente.Email" placeholder="Email" />
-    <button type="submit">Adicionar Cliente</button>
+<!-- Formulário para criar cliente -->
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <label for="Nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="Nome" name="Cliente.Nome" value="@Model.Cliente.Nome" required />
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="Email" name="Cliente.Email" value="@Model.Cliente.Email" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Criar Cliente</button>
 </form>
 
-<ul>
+<!-- Mensagem de sucesso -->
+@if (!string.IsNullOrEmpty(Model.Mensagem))
+{
+    <div class="alert alert-success">@Model.Mensagem</div>
+}
+
+<!-- Lista de clientes -->
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
     @foreach (var cliente in Model.Clientes)
     {
-        <li>@cliente.Nome (@cliente.Email)</li>
+        <tr>
+            <td>@cliente.Id</td>
+            <td>@cliente.Nome</td>
+            <td>@cliente.Email</td>
+        </tr>
     }
-</ul>
+    </tbody>
+</table>

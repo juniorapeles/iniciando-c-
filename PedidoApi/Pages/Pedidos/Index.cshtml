@@ -1,0 +1,39 @@
+﻿@page
+@model PedidoApi.Pages.Pedidos.IndexModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Pedidos";
+}
+
+<h2>Pedidos</h2>
+
+<table class="table table-striped mt-3">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Cliente</th>
+        <th>Itens</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var pedido in Model.Pedidos)
+    {
+        <tr>
+            <td>@pedido.Id</td>
+            <td>@pedido.Cliente.Nome</td>
+            <td>
+                <ul>
+                    @foreach (var item in pedido.Items)
+                    {
+                        <li>@item.Produto.Nome (@item.Quantidade)</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <a href="/Pedidos/Create" class="btn btn-success">Adicionar Pedido</a>
+</div>

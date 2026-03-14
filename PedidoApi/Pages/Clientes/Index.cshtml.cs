@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using PedidoDomain.Data;
 using PedidoDomain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace PedidoApi.Pages.Clientes
 {
@@ -16,9 +16,11 @@ namespace PedidoApi.Pages.Clientes
         }
 
         [BindProperty]
-        public Cliente NovoCliente { get; set; } = new Cliente(); // construtor sem parâmetros
+        public Cliente Cliente { get; set; } = new Cliente("", "");
 
-        public List<Cliente> Clientes { get; set; } = new();
+        public List<Cliente> Clientes { get; set; } = new List<Cliente>();
+
+        public string Mensagem { get; set; } = string.Empty;
 
         public async Task OnGetAsync()
         {
@@ -33,10 +35,14 @@ namespace PedidoApi.Pages.Clientes
                 return Page();
             }
 
-            _context.Clientes.Add(NovoCliente);
+            _context.Clientes.Add(Cliente);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage();
+            Mensagem = $"Cliente '{Cliente.Nome}' criado com sucesso!";
+            Cliente = new Cliente("", ""); // limpa o formulário
+            Clientes = await _context.Clientes.ToListAsync();
+
+            return Page();
         }
     }
 }
