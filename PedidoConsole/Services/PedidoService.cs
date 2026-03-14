@@ -1,5 +1,9 @@
-﻿namespace DotnetNovePreviewSete.Services;
+﻿
 
+using PedidoConsole.repositories;
+using PedidoDomain.Models;
+
+namespace PedidoConsole.Services;
 public class PedidoService
 {
     private Pedido pedido { get; set; }

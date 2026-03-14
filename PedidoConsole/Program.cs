@@ -1,7 +1,9 @@
 ﻿
 using System;
-using DotnetNovePreviewSete;
-using DotnetNovePreviewSete.Services;
+using PedidoConsole.repositories;
+using PedidoConsole.Services;
+using PedidoDomain.Models;
+
 
 class Program
 {

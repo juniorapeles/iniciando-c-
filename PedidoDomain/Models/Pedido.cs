@@ -1,7 +1,8 @@
-﻿namespace DotnetNovePreviewSete;
+﻿namespace PedidoDomain.Models;
 
 public class Pedido
-{
+{   
+    public int Id { get; set; }
     public List<ItemPedido> Items { get; set; } = new List<ItemPedido>();
     public Cliente Cliente { get; set; }
     

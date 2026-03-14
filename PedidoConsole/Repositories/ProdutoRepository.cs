@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
+using PedidoDomain.Models;
 
-namespace DotnetNovePreviewSete;
+namespace PedidoConsole.repositories;
 
 public class ProdutoRepository
 {
