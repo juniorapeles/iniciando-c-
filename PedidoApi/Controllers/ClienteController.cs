@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PedidoApi.DTOs;
+using PedidoApi.Services;
 using PedidoDomain.Data;
 using PedidoDomain.Models;
 
@@ -10,26 +13,28 @@ namespace PedidoApi.Controllers;
 public class ClienteController : ControllerBase
 {
     
-    private readonly PedidoDbContext _context;
+    private readonly ClienteService _service;
     
-    public ClienteController(PedidoDbContext context)
+    public ClienteController(ClienteService service)
     {
-        _context = context;
+        _service = service;
     }
 
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
-    {
-        return await _context.Clientes.ToListAsync();
+    {   
+        var clientes = await _service.ObterTodosAsync();
+        var dtos = clientes.Select(c => new ClienteDto{Nome = c.Nome, Email = c.Email}).ToList();
+        return Ok(dtos);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Cliente>> CriarCliente(Cliente cliente)
+    public async Task<ActionResult<Cliente>> CriarCliente(ClienteDto dto)
     {
-        _context.Clientes.Add(cliente);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetClientes), new { id = cliente.Id }, cliente);
+        var cliente = new Cliente { Nome = dto.Nome, Email = dto.Email };
+        var criado = await _service.CriarCliente(cliente);
+        var criadoDto = new ClienteDto{Nome = criado.Nome, Email = criado.Email};
+        return CreatedAtAction(nameof(GetClientes), new {id = criado.Id}, criadoDto);
     }
 }

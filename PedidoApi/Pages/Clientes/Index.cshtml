@@ -1,0 +1,20 @@
+﻿@page
+@model PedidoApi.Pages.Clientes.IndexModel
+@{
+    Layout = null; // você pode depois criar um _Layout.cshtml, mas por enquanto é ok
+}
+
+<h2>Clientes</h2>
+
+<form method="post">
+    <input asp-for="NovoCliente.Nome" placeholder="Nome" />
+    <input asp-for="NovoCliente.Email" placeholder="Email" />
+    <button type="submit">Adicionar Cliente</button>
+</form>
+
+<ul>
+    @foreach (var cliente in Model.Clientes)
+    {
+        <li>@cliente.Nome (@cliente.Email)</li>
+    }
+</ul>
