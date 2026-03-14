@@ -4,12 +4,16 @@ using DotnetNovePreviewSete;
 
 class Program
 {
-    private static List<Produto> produtos = new List<Produto>();
+    private static List<Produto> produtos;
+    static ProdutoRepository produtoRepository = new ProdutoRepository();
+    
     private static Pedido pedidoAtual;
     static PedidoRepository repository = new PedidoRepository();
     
     static void Main(string[] args)
     {
+        produtos = produtoRepository.Carregar();
+        
         MainFlux();
         
         int opcao = 0;
@@ -122,6 +126,8 @@ class Program
         decimal preco = decimal.Parse(Console.ReadLine());
         
         produtos.Add(new Produto(nome, preco));
+        
+        produtoRepository.Salvar(produtos);
         Console.WriteLine("Produto cadastrado com sucesso!");
     }
     
